@@ -2,18 +2,32 @@ const express = require("express");
 const app = express();
 const port = 5656;
 
-app.get("/user", (req, res) => {
-  //  {{url}}/user?userId=101&name=testing Query routing
-  console.log(req.query); //{ userId: '101', name: 'testing' }
-  //[Object: null prototype] prefix is just Node telling you the object has no prototype chain
-  res.send({ firstName: "Tirumala Teja", lastName: "Jampani" });
-});
-
-app.get("/student/:sId/:sRoll", (req, res) => {
-  //Dynamic routing we should definetly pass all the params mentioned
-  console.log(req.params);
-  res.send({ firstName: "Tirumala Teja", lastName: "Jampani" });
-});
+app.get(
+  "/student",
+  [
+    (req, res, next) => {
+      console.log("Route Handler1");
+      // res.send("Response1");
+      next();
+    },
+    (req, res, next) => {
+      console.log("Route Handler2");
+      // res.send("Response2");
+      next();
+      //even though it is in an array output does'nt change
+    },
+  ],
+  (req, res, next) => {
+    console.log("Route Handler3");
+    // res.send("Response3");
+    next(); //Keeps on waiting if there was no 4th route handler
+  },
+  (req, res, next) => {
+    console.log("Route Handler4");
+    // res.send("Response4");
+    // next(); cannot get /student/ - if above line is commented
+  }
+);
 
 app.listen(port, () => {
   console.log("Server successfully running at port:", port);
