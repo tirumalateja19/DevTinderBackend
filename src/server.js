@@ -1,23 +1,16 @@
 const express = require("express");
+const { PORT } = require("./config/constants");
+const connectDB = require("./config/database");
+
 const app = express();
-const port = 5656;
-const { studentAuth, userAuth } = require("./middleware/auth");
 
-app.use("/student", studentAuth);
-
-app.get("/user/login", userAuth, (req, res) => {
-  console.log("login handler");
-  res.send("login successfull");
-});
-app.get("/student/data", (req, res) => {
-  console.log("student handler");
-  res.send("Data sent successfull");
-});
-app.get("/student/delete", (req, res) => {
-  console.log("Deleting data");
-  res.send("Data deleted..");
-});
-
-app.listen(port, () => {
-  console.log("Server successfully running at port:", port);
-});
+connectDB()
+  .then(() => {
+    console.log("Database Connection established successfully...");
+    app.listen(PORT, () => {
+      console.log("Server is successfully running at port:", PORT);
+    });
+  })
+  .catch((err) => {
+    console.log("Database connection failed!!", err.message);
+  });
