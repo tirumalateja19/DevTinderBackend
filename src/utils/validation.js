@@ -27,7 +27,14 @@ const validateProfileEditData = (req) => {
     throw new Error("Update not allowed");
   }
 };
+const validateNewPassword = (req) => {
+  const { password } = req.body;
+  if (!validator.isStrongPassword(password)) {
+    throw new Error("Enter a strong password");
+  }
+};
 module.exports = {
   validateSignUpData,
   validateProfileEditData,
+  validateNewPassword,
 };
