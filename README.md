@@ -1,28 +1,39 @@
-# API Endpoints 
----
-## *authRouter*
+# API Endpoints
 
-### `POST /login` 
+---
+
+## _authRouter_
+
+### `POST /login`
+
 ### `POST /signup`
+
 ### `POST /logout`
 
-## *profileRouter*
+## _profileRouter_
 
 ### `GET/profile`
+
 ### `PATCH/profile/edit`
+
 ### `PATCH/profile/password`
 
-## *connectionRequestRouter*
+## _connectionRequestRouter_
 
 ### `POST /request/send/:status/:userId`
-(`POST /request/send/intrested/:userId`) 
+
+(`POST /request/send/interested/:userId`)
 (`POST /request/send/ignored/:userId`)
 
-### `POST /request/received/accepetd/:requestId`
-### `POST /request/received/rejected/:requestId`
+### `POST /request/review/:status/:requestId`
 
-## *userRouter*
+(`POST /request/review/accepted/:requestId`)
+(`POST /request/review/rejected/:requestId`)
 
-### `GET/user/connections` 
-### `GET/user/requests` 
-### `GET/user/feed` 
+## _userRouter_
+
+### `GET/user/requests/received`
+
+### `GET/user/connections`
+
+### `GET/user/feed`
