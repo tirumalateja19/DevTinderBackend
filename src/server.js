@@ -14,8 +14,6 @@ const PORT = process.env.PORT;
 app.use(
   cors({
     origin: "https://devtinder00.netlify.app",
-    methods: ['GET', 'POST','PATCH','DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
   }),
 );
