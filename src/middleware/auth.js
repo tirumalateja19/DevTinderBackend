@@ -9,7 +9,7 @@ const userAuth = async (req, res, next) => {
     const decode = await jwt.verify(token, "DevZone19");
     const { _id } = decode;
     const user = await User.findById(_id);
-    if (!_id) {
+    if (!user) {
       throw new Error("User not found");
     } else {
       req.user = user;
