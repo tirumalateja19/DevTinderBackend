@@ -39,6 +39,9 @@ authRouter.post("/login", async (req, res) => {
       const token = await user.getJWT();
       res.cookie("token", token, {
         expires: new Date(Date.now() + 7 * 3600000),
+        httpOnly: true, // add this too — security best practice
+        secure: true, // required for HTTPS (Render)
+        sameSite: "None", // required for cross-domain (Netlify ↔ Render)
       });
       res.send(user);
     } else {
@@ -53,6 +56,9 @@ authRouter.post("/login", async (req, res) => {
 authRouter.post("/logout", (req, res) => {
   res.cookie("token", null, {
     expires: new Date(Date.now()),
+    httpOnly: true,
+    secure: true,
+    sameSite: "None",
   });
   res.send("Logout successfull");
 });
